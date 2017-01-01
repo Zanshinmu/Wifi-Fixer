@@ -20,9 +20,7 @@
 
 <resources>
 
-    <string name="network_status">Estado de la Red</string>
     <string name="scheduling_n1_fix">Scheduling N1 Fix</string>
-    <string name="widget_update_called">Widget Update Called</string>
     <string name="logfile_delete_err_toast">Habilitar Registro para Recaudar Datos</string>
     <string name="logfile_delete_toast">Archivo de Registro Borrado</string>
     <string name="connect">Conectar</string>
@@ -40,7 +38,6 @@
     <string name="about">Acerca de</string>
     <string name="help">Ayuda</string>
     <string name="preferences">Configuracion</string>
-    <string name="send_log">Enviar registro</string>
     <string name="ondestroy">onDestroy controlador</string>
     <string name="colon">:</string>
     <string name="prefs_change">Prefs Change:</string>
@@ -51,7 +48,6 @@
     <string name="signal_poor">Señal debil: Busqueda SignalHop</string>
     <string name="current_dbm">Intensidad actual dBm:</string>
     <string name="hopping">Esperando una red mejor</string>
-    <string name="wifi_repair_post_failed">Wifi Repair:Screen Off</string>
     <string name="wifi_not_current_network">Wifi Not Current Network</string>
     <string name="running_wifi_repair">Ejecutando Reparacion de Wifi</string>
     <string name="releasing_wake_lock">Liberando &quot;Wake Lock&quot;</string>
@@ -105,41 +101,26 @@
     <string name="failed">RECHAZADO</string>
     <string name="reenablenetwork">Rehabilitacion de red deshabilitada:</string>
     <string name="authentication_error">Error de Autentificacion</string>
-    <string name="set_non_managed">Fijar No Gestionado</string>
     <string name="scan_interrupt">La busqueda interrumpira supplicant</string>
     <string name="not_managing_network">Red no gestionada:</string>
-    <string name="supplicant_associate_threshold_exceeded">Umbral de asociacion excedido: reseteando
-        wifi
-    </string>
     <string name="none">ninguno</string>
     <string name="low_memory">Memoria Baja</string>
-    <string name="error_allocating_buffered_writer">Error ubicando escritor en buffer:</string>
     <string name="log_mimetype">message/rfc882</string>
     <string name="scan_mode">Debe estar en modo busqueda de sistema normal</string>
-    <string name="alert_message">Preparando email"</string>
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
     <string name="null_ssid">Ninguno</string>
     <string name="http">http://</string>
-    <string name="k">KB</string>
     <string name="strict_mode_extant">Modo Estricto Existente</string>
     <string name="strict_mode_unavailable">Modo Estricto Strict Mode No Disponible</string>
-    <string name="service_status">Servicio</string>
     <string name="enabling_wififixerservice">WifiFixerService Habilitado</string>
     <string name="disabling_wififixerservice">WifiFixerService Deshabilitado</string>
     <string name="wifi">WiFi</string>
-    <string name="enabling_wifi">Habilitando Wifi</string>
-    <string name="disabling_wifi">Deshabilitando Wifi</string>
-    <string name="knownnetworks_fragment_header">Redes Conocidas</string>
-    <string name="scanfragment_header">Redes Cercanas</string>
     <string name="open_network">Abierta</string>
-    <string name="xml">xml</string>
     <string name="SCREEN_summary">El servicio chequea la red cuando la pantalla esta apagada: usara
         un poco mas de bateria
     </string>
     <string name="SCREEN_title">Administrar Durante la Suspension</string>
-    <string name="Disable_title">Deshabilitar Servicio</string>
-    <string name="Disable_summary">Deshabilita el servicio de administracion wifi</string>
     <string name="Perf_Mode_title">Establecer Perfil Wifi</string>
     <string name="Perf_Mode_summary">Ajusta automaticamente las opciones usando perfiles predeterminados</string>
     <string name="StateNotif_title">Notificacion de Status</string>
@@ -190,7 +171,6 @@
     <string name="ms">ms</string>
     <string name="later_button">Luego</string>
     <string name="scan_failed">Busqueda Fallida: Reseteando Wifi</string>
-    <string name="scan_bounce">Patron de falla Supplicant detectado:Reseteando</string>
     <string name="wifimanager_scan">Solicitando busqueda al WifiManager</string>
     <string name="issue_report_header">Reporte de Incidencia</string>
     <string name="issue_report_nag">El Reporte ed Incidencia debe ser llenado para enviar el registro</string>
@@ -199,7 +179,6 @@
     <string name="network_at_priority_floor">Red en el fondo de la prioridad:</string>
     <string name="priority">Prioridad:</string>
     <string name="error">error</string>
-    <string name="log">Registro</string>
     <string name="sendlog_summary">Enviar registro al Desarrollador</string>
     <string name="sendlog_title">Enviar Registro</string>
     <string name="dbmfloor_title">Nivel de Signalhop</string>
@@ -207,13 +186,9 @@
         recomendado
     </string>
     <string name="dbmfloor_key">DBMFLOOR</string>
-    <string name="wififixerservice">WifiFixerService</string>
     <string name="no_stack_trace_found">No se encontro seguimiento de pila</string>
-    <string name="known_networks">Conocidas</string>
-    <string name="local_networks">Cercanas</string>
     <string name="not_connected">No Conectado</string>
     <string name="service_inactive">Servicio Inactivo</string>
-    <string name="info">Info</string>
     <string name="disconnected">Disconectado</string>
     <string name="note">Importante!</string>
     <string name="servicealert_message">Cuando el servicio es deshabilitado tu Wifi no sera monitoreada o reparada
@@ -221,10 +196,8 @@
     <string name="widget_label_1x4">Wifi Fixer 1x4</string>
     <string name="widget_label_1x1">Wifi Fixer 1x1</string>
     <string name="netcheckthread">MasterSensorThread</string>
-    <string name="logwriterthread">LogWriterThread</string>
     <string name="malformed_url_exception">Excepcion de URL Malformada</string>
     <string name="reassoc">Reasociar</string>
-    <string name="status">Status</string>
     <string name="managed">Administrada</string>
     <string name="nonmanaged">Ignorar</string>
     <string name="quick_text">Quickbar</string>
@@ -245,7 +218,6 @@
     <string name="failover">Target Host set to:</string>
     <string name="youhave">Tiene </string>
     <string name="messages"> mensajes</string>
-    <string name="error_c2b">Empty Network List in connectToBest</string>
     <string name="network_check_retry">Network check failed: Trying again</string>
     <string name="copyright">Copyright © 2010–2016  David Van de Ven</string>
     <string name="promo">Wifi Fixer works around several problems with Android wifi.</string>

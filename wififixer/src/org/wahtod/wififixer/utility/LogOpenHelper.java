@@ -37,23 +37,8 @@ public class LogOpenHelper extends SQLiteOpenHelper {
     public static final String ID_KEY = "id";
     public static final String TEXT_KEY = "logtext";
     public static final String TIMESTAMP_KEY = "timeStamp";
-    private volatile LogObservable logObservable;
-
-    private static class LogObservable extends Observable {
-        @Override
-        public void notifyObservers(Object data) {
-            super.notifyObservers(data);
-        }
-
-        public void changed() {
-            setChanged();
-        }
-    }
-
-    ;
-
     private static volatile LogOpenHelper _instance;
-
+    private volatile LogObservable logObservable;
     private volatile SQLiteDatabase database;
 
     private LogOpenHelper(Context context) {
@@ -139,5 +124,16 @@ public class LogOpenHelper extends SQLiteOpenHelper {
 
     public void unregisterLogObserver(Observer observer) {
         logObservable.deleteObserver(observer);
+    }
+
+    private static class LogObservable extends Observable {
+        @Override
+        public void notifyObservers(Object data) {
+            super.notifyObservers(data);
+        }
+
+        public void changed() {
+            setChanged();
+        }
     }
 }

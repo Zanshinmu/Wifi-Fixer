@@ -33,8 +33,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import org.wahtod.wififixer.R;
-import org.wahtod.wififixer.utility.*;
+import org.wahtod.wififixer.utility.AsyncWifiManager;
+import org.wahtod.wififixer.utility.BroadcastHelper;
+import org.wahtod.wififixer.utility.NotifUtil;
+import org.wahtod.wififixer.utility.StatusDispatcher;
+import org.wahtod.wififixer.utility.StatusMessage;
+import org.wahtod.wififixer.utility.StringUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -55,8 +61,9 @@ public class StatusFragment extends Fragment {
 			 */
             switch (message.what) {
                 case REFRESH:
-                    if (self.get().getActivity() != null)
+                    if (self.get().getActivity() != null) {
                         self.get().refresh();
+                    }
                     break;
 
                 case STATUS_MESSAGE:

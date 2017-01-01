@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
+
 import org.wahtod.wififixer.legacy.VersionedScreenState;
 
 import java.lang.ref.WeakReference;
@@ -38,11 +39,7 @@ public class ScreenStateDetector {
 
     private static final int SCREEN_EVENT_OFF = 0;
     private static final int SCREEN_EVENT_ON = 1;
-
-    public interface OnScreenStateChangedListener {
-        public abstract void onScreenStateChanged(boolean state);
-    }
-
+    private static ArrayList<WeakReference<OnScreenStateChangedListener>> _clients = new ArrayList<WeakReference<OnScreenStateChangedListener>>();
     private static Handler statehandler = new Handler() {
         @Override
         public void handleMessage(Message message) {
@@ -57,8 +54,31 @@ public class ScreenStateDetector {
             }
         }
     };
+    private static ScreenStateDetector _screenStateDetector;
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String iAction = intent.getAction();
 
-    private static ArrayList<WeakReference<OnScreenStateChangedListener>> _clients = new ArrayList<WeakReference<OnScreenStateChangedListener>>();
+            if (iAction.equals(Intent.ACTION_SCREEN_ON))
+                statehandler.sendEmptyMessage(SCREEN_EVENT_ON);
+            else
+                statehandler.sendEmptyMessage(SCREEN_EVENT_OFF);
+        }
+    };
+
+    private ScreenStateDetector(Context context) {
+            /*
+			 * Register for screen state events
+			 *
+			 * Note: this Initializer must be used if you want to receive the
+			 * intent broadcast: must use the unregister method appropriately in
+			 * the context where you instantiated it or leak receiver
+			 */
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        BroadcastHelper.registerReceiver(context, receiver, filter, false);
+    }
 
     public static boolean getScreenState(Context context) {
         return VersionedScreenState.getScreenState(context);
@@ -86,37 +106,10 @@ public class ScreenStateDetector {
                     listener));
     }
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String iAction = intent.getAction();
-
-            if (iAction.equals(Intent.ACTION_SCREEN_ON))
-                statehandler.sendEmptyMessage(SCREEN_EVENT_ON);
-            else
-                statehandler.sendEmptyMessage(SCREEN_EVENT_OFF);
-        }
-    };
-
-    private static ScreenStateDetector _screenStateDetector;
-
     public static ScreenStateDetector newInstance(Context context) {
         if (_screenStateDetector == null)
             _screenStateDetector = new ScreenStateDetector(context.getApplicationContext());
         return _screenStateDetector;
-    }
-
-    private ScreenStateDetector(Context context) {
-			/*
-			 * Register for screen state events
-			 * 
-			 * Note: this Initializer must be used if you want to receive the
-			 * intent broadcast: must use the unregister method appropriately in
-			 * the context where you instantiated it or leak receiver
-			 */
-        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
-        filter.addAction(Intent.ACTION_SCREEN_ON);
-        BroadcastHelper.registerReceiver(context, receiver, filter, false);
     }
 
     public void unregister(Context context) {
@@ -127,5 +120,9 @@ public class ScreenStateDetector {
             OnScreenStateChangedListener listener) {
         if (_clients.contains(listener))
             _clients.remove(listener);
+    }
+
+    public interface OnScreenStateChangedListener {
+        void onScreenStateChanged(boolean state);
     }
 }

@@ -1,0 +1,5 @@
+<application>
+  <component name="Registry">
+    <entry key="analyze.exceptions.on.the.fly" value="true" />
+  </component>
+</application>

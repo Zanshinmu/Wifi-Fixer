@@ -20,9 +20,7 @@
 
 <resources>
 
-    <string name="network_status">Network Status</string>
     <string name="scheduling_n1_fix">Scheduling N1 Fix</string>
-    <string name="widget_update_called">Widget Update Called</string>
     <string name="logfile_delete_err_toast">Log does not exist</string>
     <string name="logfile_delete_toast">Log File Deleted</string>
     <string name="connect">Connect</string>
@@ -41,7 +39,6 @@
     <string name="about">About</string>
     <string name="help">Help</string>
     <string name="preferences">Settings</string>
-    <string name="send_log">Send Log</string>
     <string name="ondestroy">Service Destroyed</string>
     <string name="colon">:</string>
     <string name="prefs_change">Prefs Change:</string>
@@ -52,7 +49,6 @@
     <string name="signal_poor">Signal poor: SignalHop scan</string>
     <string name="current_dbm">Current dBm:</string>
     <string name="hopping">Hopping to better network</string>
-    <string name="wifi_repair_post_failed">Wifi Repair:Screen Off</string>
     <string name="wifi_not_current_network">Wifi Not Current Network</string>
     <string name="running_wifi_repair">Running Wifi Repair</string>
     <string name="releasing_wake_lock">Releasing Wake Lock</string>
@@ -109,43 +105,26 @@
     <string name="failed">FAILED</string>
     <string name="reenablenetwork">Disabled network re-enabled:</string>
     <string name="authentication_error">Authentication Error</string>
-    <string name="set_non_managed">Toggle Non-Managed</string>
     <string name="scan_interrupt">Scan would interrupt supplicant</string>
     <string name="not_managing_network">Not managing network:</string>
-    <string name="supplicant_associate_threshold_exceeded">Associate Threshold Exceeded: resetting
-        wifi
-    </string>
     <string name="none">none</string>
     <string name="low_memory">Low Memory</string>
-    <string name="error_allocating_buffered_writer">Error allocating buffered writer:</string>
     <string name="log_mimetype">message/rfc882</string>
-    <string name="unmanaged" translatable="false">-U-</string>
     <string name="scan_mode">Should be in normal system scan mode</string>
-    <string name="alert_message">Preparing email</string>
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
     <string name="null_ssid">None</string>
     <string name="http">http://</string>
-    <string name="k">KB</string>
     <string name="strict_mode_extant">Strict Mode Extant</string>
     <string name="strict_mode_unavailable">Strict Mode Unavailable</string>
-    <string name="service_status">Service</string>
     <string name="enabling_wififixerservice">Service Enabled</string>
     <string name="disabling_wififixerservice">Service Disabled</string>
     <string name="wifi">WiFi</string>
-    <string name="enabling_wifi">Enabling Wifi</string>
-    <string name="disabling_wifi">Disabling Wifi</string>
-    <string name="knownnetworks_fragment_header">Known Networks</string>
-    <string name="scanfragment_header">Local Networks</string>
     <string name="open_network">Open</string>
-    <string name="resource" translatable="false">resource</string>
-    <string name="xml">xml</string>
     <string name="SCREEN_summary">Service checks network when screen is off: will use
         slightly more battery
     </string>
     <string name="SCREEN_title">Manage During Sleep</string>
-    <string name="Disable_title">Disable Service</string>
-    <string name="Disable_summary">Disables wifi management service</string>
     <string name="Perf_Mode_title">Set Wifi Profile</string>
     <string name="Perf_Mode_summary">Adjusts settings automatically using profiles</string>
     <string name="StateNotif_title">Status Notification</string>
@@ -198,7 +177,6 @@
     <string name="ms">ms</string>
     <string name="later_button">Later</string>
     <string name="scan_failed">Scan Failed: Resetting Wifi</string>
-    <string name="scan_bounce">Supplicant Failure Pattern Detected:Resetting</string>
     <string name="wifimanager_scan">Requesting Scan from WifiManager</string>
     <string name="issue_report_header">Issue Report</string>
     <string name="issue_report_nag">Issue report must be completed to send log</string>
@@ -207,19 +185,14 @@
     <string name="network_at_priority_floor">Network at priority floor:</string>
     <string name="priority">Priority:</string>
     <string name="error">error</string>
-    <string name="log">Log</string>
     <string name="dbmfloor_title">Signalhop Level</string>
     <string name="dbmfloor_summary">Level at which Wifi Fixer scans for a better known network \nDefault is
         recommended
     </string>
     <string name="dbmfloor_key">DBMFLOOR</string>
-    <string name="wififixerservice">WifiFixerService</string>
     <string name="no_stack_trace_found">No Stack Trace Found</string>
-    <string name="known_networks">Known</string>
-    <string name="local_networks">Local</string>
     <string name="not_connected">Not Connected</string>
     <string name="service_inactive">Service Inactive</string>
-    <string name="info">Info</string>
     <string name="disconnected">Disconnected</string>
     <string name="note">Important!</string>
     <string name="servicealert_message">When the service is disabled, your wifi is no longer monitored or repaired
@@ -227,13 +200,11 @@
     <string name="widget_label_1x4">Wifi Fixer 1x4</string>
     <string name="widget_label_1x1">Wifi Fixer 1x1</string>
     <string name="netcheckthread">HostupMasterThread</string>
-    <string name="logwriterthread">LogWriterThread</string>
     <string name="httpcheckthread" translatable="false">HttpSensorThread</string>
     <string name="icmpcheckthread" translatable="false">IcmpSensorThread</string>
     <string name="malformed_url_exception">Malformed URL Exception</string>
     <string name="i_o_exception" translatable="false">I/O Exception</string>
     <string name="reassoc">Reassociate</string>
-    <string name="status">Status</string>
     <string name="managed">Managed</string>
     <string name="nonmanaged">Ignore</string>
     <string name="quick_text">Quickbar</string>
@@ -255,7 +226,6 @@
     <string name="sendlog_summary">Send Log to developer</string>
     <string name="youhave">You have</string>
     <string name="messages">messages</string>
-    <string name="error_c2b">Empty Network List in connectToBest</string>
     <string name="network_check_retry">Network check failed: Trying again</string>
     <string name="copyright">Copyright © 2010–2016  David Van de Ven</string>
     <string name="gpl_part_1" translatable="false">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</string>

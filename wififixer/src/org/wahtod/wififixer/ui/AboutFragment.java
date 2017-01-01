@@ -38,9 +38,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+
 import org.wahtod.wififixer.R;
 import org.wahtod.wififixer.prefs.PrefUtil;
-import org.wahtod.wififixer.utility.*;
+import org.wahtod.wififixer.utility.AsyncWifiManager;
+import org.wahtod.wififixer.utility.BroadcastHelper;
+import org.wahtod.wififixer.utility.LogUtil;
+import org.wahtod.wififixer.utility.StringUtil;
+import org.wahtod.wififixer.utility.WFScanResult;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -105,8 +110,6 @@ public class AboutFragment extends Fragment implements OnClickListener {
         return f;
     }
 
-    ;
-
     private void refreshViews() {
         try {
             if (mNetwork.SSID.length() > 0)
@@ -146,22 +149,22 @@ public class AboutFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        self = new WeakReference<AboutFragment>(this);
+        self = new WeakReference<>(this);
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState == null) {
+        /*
+         * Restore Network
+         */
+        if (savedInstanceState != null)
+            mNetwork = WFScanResult.fromBundle(savedInstanceState.getBundle(NETWORK_KEY));
+        else {
             /*
              * Do nothing
              */
-        } else {
-            /*
-             * Restore Network
-             */
-            mNetwork = WFScanResult.fromBundle(savedInstanceState.getBundle(NETWORK_KEY));
         }
         IntentFilter scan = new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
         BroadcastHelper.registerReceiver(getActivity(), scanreceiver, scan, false);
@@ -191,11 +194,9 @@ public class AboutFragment extends Fragment implements OnClickListener {
         /*
          * Animate the view
 		 */
-        if (enter && !(transit == 17432576)) {
-            ExpandViewAnimation ev = new ExpandViewAnimation(getView()
-                    .findViewById(R.id.about_fragment_layout), ExpandViewAnimation.DURATION);
-            return ev;
-        } else {
+        if (enter && !(transit == 17432576)) return new ExpandViewAnimation(getView()
+                .findViewById(R.id.about_fragment_layout), ExpandViewAnimation.DURATION);
+        else {
             Animation anim;
             try {
                 anim = AnimationUtils.loadAnimation(getActivity(), transit);
@@ -224,7 +225,7 @@ public class AboutFragment extends Fragment implements OnClickListener {
         private TextView frequency;
         private TextView level;
 
-        public ViewHolder(View parent) {
+        ViewHolder(View parent) {
             ssid = (TextView) parent.findViewById(R.id.ssid);
             bssid = (TextView) parent.findViewById(R.id.bssid);
             capabilities = (TextView) parent.findViewById(R.id.capabilities);
@@ -236,7 +237,7 @@ public class AboutFragment extends Fragment implements OnClickListener {
             ssid.setText(s);
         }
 
-        public void setBssid(String s) {
+        void setBssid(String s) {
             bssid.setText(s);
         }
 
@@ -244,7 +245,7 @@ public class AboutFragment extends Fragment implements OnClickListener {
             capabilities.setText(s);
         }
 
-        public void setFrequency(int i) {
+        void setFrequency(int i) {
             frequency.setText(String.valueOf(i));
         }
 

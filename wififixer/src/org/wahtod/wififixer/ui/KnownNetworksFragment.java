@@ -21,7 +21,11 @@ package org.wahtod.wififixer.ui;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.*;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.wifi.ScanResult;
@@ -31,7 +35,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.view.ActionMode.Callback;
@@ -41,8 +44,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import org.wahtod.wififixer.R;
 import org.wahtod.wififixer.WFMonitor;
@@ -103,6 +110,23 @@ public class KnownNetworksFragment extends Fragment {
             }
         }
     };
+    protected Object mActionMode;
+    protected String mSSID;
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    removeNetwork(PrefUtil.getNid(getContext(), mSSID));
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    // Ok, do nothing
+                    break;
+            }
+        }
+    };
+    private OnFragmentPauseRequestListener mFragmentPauseRequestListener;
     public Callback mActionModeCallback = new Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -191,23 +215,6 @@ public class KnownNetworksFragment extends Fragment {
             return true;
         }
     };
-    protected Object mActionMode;
-    protected String mSSID;
-    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            switch (which) {
-                case DialogInterface.BUTTON_POSITIVE:
-                    removeNetwork(PrefUtil.getNid(getContext(), mSSID));
-                    break;
-
-                case DialogInterface.BUTTON_NEGATIVE:
-                    // Ok, do nothing
-                    break;
-            }
-        }
-    };
-    private OnFragmentPauseRequestListener mFragmentPauseRequestListener;
     private OnItemLongClickListener il = new OnItemLongClickListener() {
 
         @SuppressLint("NewApi")
@@ -445,7 +452,7 @@ public class KnownNetworksFragment extends Fragment {
     }
 
     public interface OnFragmentPauseRequestListener {
-        public void onFragmentPauseRequest(boolean state);
+        void onFragmentPauseRequest(boolean state);
     }
 
     /*
