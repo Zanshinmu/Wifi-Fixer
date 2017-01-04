@@ -20,33 +20,16 @@
 
 <resources>
 
-    <dimen name="aboutfragment_layout_padding_bottom">10dp</dimen>
-    <dimen name="listview_height">72dp</dimen>
     <dimen name="known_list_padding_bottom">10dp</dimen>
     <dimen name="known_list_padding_top">5dp</dimen>
     <dimen name="known_list_padding_left">25dp</dimen>
-    <dimen name="known_list_margin_left">15dp</dimen>
-    <dimen name="known_list_ssid_margin">15dp</dimen>
-    <dimen name="known_list_ssid_layout_width">140dp</dimen>
     <dimen name="known_list_icon_height">32dp</dimen>
     <dimen name="known_list_icon_width">32dp</dimen>
-    <dimen name="knownnetworks_header_padding_bottom">10dp</dimen>
-    <dimen name="knownnetworks_header_padding_top">10dp</dimen>
     <dimen name="knownnetworks_list_padding_left">5dp</dimen>
-    <dimen name="fragmentcontainer_padding_bottom">10dp</dimen>
     <dimen name="scan_list_padding">5dp</dimen>
     <dimen name="scan_list_ssid_margin_bottom">2dp</dimen>
     <dimen name="scan_list_ssid_margin_left">10dp</dimen>
     <dimen name="scannetworks_list_padding">20dp</dimen>
-    <dimen name="scannetworks_title_padding_bottom">5dp</dimen>
-    <dimen name="scannetworks_title_padding_top">10dp</dimen>
-    <dimen name="service_wficon_padding_bottom">10dp</dimen>
-    <dimen name="service_version_layout_width">80dp</dimen>
-    <dimen name="service_version_margin_left">100dp</dimen>
-    <dimen name="service_version_padding_bottom">15dp</dimen>
-    <dimen name="service_version_padding_top">25dp</dimen>
-    <dimen name="service_imagebutton_margin_bottom">5dp</dimen>
-    <dimen name="service_imagebutton_margin_top">10dp</dimen>
     <dimen name="status_padding">5dp</dimen>
     <dimen name="inserted_fragment_width">600dp</dimen>
 

@@ -25,7 +25,7 @@ buildscript {
         maven { url 'http://repo1.maven.org/maven2' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.2.3'
     }
 }
 apply plugin: 'com.android.application'
@@ -39,12 +39,21 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:23.4.0'
+    //  compile 'com.android.support:support-v4:25.1.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:preference-v7:23.4.0'
+    compile 'com.android.support:support-annotations:25.1.0'
+    //  compile 'com.android.support:design:25.1.0'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }
 
 android {
+
+    final def options = packagingOptions {
+        exclude 'AndroidManifest.xml'
+    }
     packagingOptions {
         exclude 'AndroidManifest.xml'
     }
@@ -104,5 +113,8 @@ android {
         }
 
         instrumentTest.setRoot('tests')
+    }
+    defaultConfig {
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 }

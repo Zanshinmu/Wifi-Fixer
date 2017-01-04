@@ -22,6 +22,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+
 import org.wahtod.wififixer.utility.StatusDispatcher;
 
 public class FixerWidgetSmall extends AppWidgetProvider {
@@ -62,4 +63,4 @@ public class FixerWidgetSmall extends AppWidgetProvider {
         context.startService(UpdateService.updateIntent(context,
                 UpdateService.class, FixerWidgetSmall.class.getName()));
     }
-};
+}

@@ -26,7 +26,6 @@ import android.support.v4.view.ViewPager;
 import org.wahtod.wififixer.R;
 import org.wahtod.wififixer.prefs.PrefConstants;
 import org.wahtod.wififixer.prefs.PrefUtil;
-import org.wahtod.wififixer.utility.LogUtil;
 import org.wahtod.wififixer.utility.NotifUtil;
 
 import java.lang.ref.WeakReference;
@@ -42,11 +41,7 @@ public abstract class TutorialFragmentActivity extends AppFragmentActivity {
     private static final int TOAST_DELAY = 4000;
     private static final String CURRENT_PART = "TutorialFragmentActivity:CURRENT_PART";
     private static final long RESTORE_DELAY = 1000;
-
-    private int part = -1;
-    private ViewPager pv;
     private static WeakReference<TutorialFragmentActivity> self;
-
     private static Handler handler = new Handler() {
         @Override
         public void handleMessage(Message message) {
@@ -104,6 +99,12 @@ public abstract class TutorialFragmentActivity extends AppFragmentActivity {
             }
         }
     };
+    private int part = -1;
+    private ViewPager pv;
+
+    public static Message getMessage(int message, int data) {
+        return handler.obtainMessage(message, data, 0);
+    }
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -117,7 +118,7 @@ public abstract class TutorialFragmentActivity extends AppFragmentActivity {
         }
     }
 
-    @Override
+
     protected void onPause() {
         removeAllMessages();
         super.onPause();
@@ -147,9 +148,5 @@ public abstract class TutorialFragmentActivity extends AppFragmentActivity {
     public void runTutorial() {
         handler.sendEmptyMessage(PART1);
         PrefUtil.writeBoolean(this, PrefConstants.TUTORIAL, true);
-    }
-
-    public static Message getMessage(int message, int data) {
-        return handler.obtainMessage(message, data, 0);
     }
 }

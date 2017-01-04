@@ -41,11 +41,6 @@
         <item>2</item>
         <item>3</item>
     </string-array>
-    <string-array name="wfsleepValues" translatable="false">
-    <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
     <string-array name="widget">
         <item>@string/reassociate</item>
         <item>@string/resetwifi</item>
@@ -56,12 +51,6 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
-    </string-array>
-    <string-array name="hopThreshold" translatable="false">
-    <item>-90</item>
-        <item>-80</item>
-        <item>-70</item>
-        <item>-60</item>
     </string-array>
 
     <string name="maxwifi">Max Wifi</string>

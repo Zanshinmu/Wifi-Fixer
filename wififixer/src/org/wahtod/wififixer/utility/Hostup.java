@@ -29,20 +29,15 @@ import org.wahtod.wififixer.prefs.PrefUtil;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.net.*;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.util.concurrent.RejectedExecutionException;
 
 public class Hostup {
-    private volatile String accesspointIP;
-
-    public interface HostupResponse {
-        public void onHostupResponse(HostMessage hostMessage);
-    }
-
-    ;
     /*
      * getHostUp method: Performs network check calibrated with SetFailover
      */
@@ -51,30 +46,43 @@ public class Hostup {
     public static final String FAILOVER2 = "www.baidu.com";
     public static final int HTTP_TYPE = 1;
     public static final int ICMP_TYPE = 0;
-    protected static int checktype = -1;
     protected static final String INET_LOOPBACK = "127.0.0.1";
     protected static final String INET_INVALID = "0.0.0.0";
     protected static final int TIMEOUT_EXTRA = 2000;
     private static final int HTTP_TIMEOUT = 4000;
     private static final String REJECTED_EXECUTION = "Rejected Execution";
-    private static Hostup _hostup;
-    private static ThreadHandler _nethandler;
+    protected static int checktype = -1;
     protected static volatile String target;
     protected static volatile HostMessage response;
     protected static volatile URI headURI;
     protected static volatile int reachable;
     protected static volatile int mCurrentSession;
-    protected volatile WeakReference<Context> mContext;
-    protected volatile Thread masterThread;
     protected static volatile boolean mFinished;
+    private static Hostup _hostup;
+    private static ThreadHandler _nethandler;
     private static ThreadHandler httpHandler;
     private static ThreadHandler icmpHandler;
+    protected volatile WeakReference<Context> mContext;
+    protected volatile Thread masterThread;
+    private volatile String accesspointIP;
     private HostupResponse mClient;
-
     private Hostup(Context c) {
         mCurrentSession = 0;
         mContext = new WeakReference<Context>(c.getApplicationContext());
         disableConnectionReuse();
+    }
+
+    public static Hostup newInstance(Context context) {
+        if (_hostup == null)
+            _hostup = new Hostup(context.getApplicationContext());
+        else {
+            httpHandler = new ThreadHandler(context.getString(R.string.httpcheckthread));
+            icmpHandler = new ThreadHandler(context.getString(R.string.icmpcheckthread));
+            _nethandler = new ThreadHandler(
+                    context.getString(R.string.netcheckthread));
+            _hostup.masterThread = _nethandler.getLooper().getThread();
+        }
+        return _hostup;
     }
 
     public void registerClient(HostupResponse client) {
@@ -100,19 +108,6 @@ public class Hostup {
             if (PrefUtil.getFlag(PrefConstants.Pref.DEBUG))
                 LogUtil.log(context, "Invalid Gateway on ICMP cache");
         }
-    }
-
-    public static Hostup newInstance(Context context) {
-        if (_hostup == null)
-            _hostup = new Hostup(context.getApplicationContext());
-        else {
-            _hostup.httpHandler = new ThreadHandler(context.getString(R.string.httpcheckthread));
-            _hostup.icmpHandler = new ThreadHandler(context.getString(R.string.icmpcheckthread));
-            _nethandler = new ThreadHandler(
-                    context.getString(R.string.netcheckthread));
-            _hostup.masterThread = _nethandler.getLooper().getThread();
-        }
-        return _hostup;
     }
 
     protected synchronized void complete(HostMessage h, int session) {
@@ -254,6 +249,10 @@ public class Hostup {
         _nethandler = null;
     }
 
+    public interface HostupResponse {
+        void onHostupResponse(HostMessage hostMessage);
+    }
+
     private class SetFailover implements Runnable {
         @Override
         public void run() {
@@ -284,8 +283,6 @@ public class Hostup {
 
         }
     }
-
-    ;
 
     /*
          * http header check thread

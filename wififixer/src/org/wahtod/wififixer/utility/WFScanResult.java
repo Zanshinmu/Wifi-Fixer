@@ -25,72 +25,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WFScanResult {
-    public String SSID;
-    public String BSSID;
-    public String capabilities;
-    public int level;
-    public int frequency;
-
     public static final String SSID_BUNDLE_KEY = "SSID";
     public static final String BSSID_BUNDLE_KEY = "BSSID";
     public static final String CAPABILITIES_BUNDLE_KEY = "CAPABILITIES";
     public static final String FREQUENCY_BUNDLE_KEY = "FREQUENCY";
     public static final String LEVEL_BUNDLE_KEY = "LEVEL";
     public static final String BUNDLE_KEY = "WFSCANRESULT";
-
-    @Override
-    public int hashCode() {
-        int hash = 1;
-        hash = hash * 31 + (BSSID == null ? 0 : BSSID.hashCode());
-        hash = hash * 31 + (SSID == null ? 0 : SSID.hashCode());
-        hash = hash * 31 + (capabilities == null ? 0 : capabilities.hashCode());
-        return hash;
-
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == null)
-            return false;
-        if (this.getClass() != other.getClass())
-            return false;
-        WFScanResult o = (WFScanResult) other;
-        if (o.BSSID.equals(this.BSSID))
-            return true;
-        else
-            return false;
-
-    }
+    public String SSID;
+    public String BSSID;
+    public String capabilities;
+    public int level;
+    public int frequency;
 
     public WFScanResult() {
         SSID = "";
         capabilities = "";
         BSSID = "";
-    }
-
-    public static WFScanResult fromBundle(Bundle bundle) {
-        WFScanResult out = new WFScanResult();
-        if (bundle != null && bundle.containsKey(BUNDLE_KEY)) {
-            Bundle fields = bundle.getBundle(BUNDLE_KEY);
-            out.SSID = fields.getString(SSID_BUNDLE_KEY);
-            out.BSSID = fields.getString(BSSID_BUNDLE_KEY);
-            out.capabilities = fields.getString(CAPABILITIES_BUNDLE_KEY);
-            out.level = fields.getInt(LEVEL_BUNDLE_KEY);
-            out.frequency = fields.getInt(FREQUENCY_BUNDLE_KEY);
-        }
-        return out;
-    }
-
-    public Bundle toBundle() {
-        Bundle wrapper = new Bundle();
-        Bundle bundle = new Bundle();
-        bundle.putString(SSID_BUNDLE_KEY, SSID);
-        bundle.putString(BSSID_BUNDLE_KEY, BSSID);
-        bundle.putString(CAPABILITIES_BUNDLE_KEY, capabilities);
-        bundle.putInt(LEVEL_BUNDLE_KEY, level);
-        bundle.putInt(FREQUENCY_BUNDLE_KEY, frequency);
-        wrapper.putBundle(BUNDLE_KEY, bundle);
-        return wrapper;
     }
 
     public WFScanResult(ScanResult result) {
@@ -112,6 +62,19 @@ public class WFScanResult {
         frequency = result.frequency;
     }
 
+    public static WFScanResult fromBundle(Bundle bundle) {
+        WFScanResult out = new WFScanResult();
+        if (bundle != null && bundle.containsKey(BUNDLE_KEY)) {
+            Bundle fields = bundle.getBundle(BUNDLE_KEY);
+            out.SSID = fields.getString(SSID_BUNDLE_KEY);
+            out.BSSID = fields.getString(BSSID_BUNDLE_KEY);
+            out.capabilities = fields.getString(CAPABILITIES_BUNDLE_KEY);
+            out.level = fields.getInt(LEVEL_BUNDLE_KEY);
+            out.frequency = fields.getInt(FREQUENCY_BUNDLE_KEY);
+        }
+        return out;
+    }
+
     public static List<WFScanResult> fromScanResultArray(
             List<ScanResult> results) {
         if (results == null)
@@ -125,5 +88,38 @@ public class WFScanResult {
                 out.add(new WFScanResult(result));
         }
         return out;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 1;
+        hash = hash * 31 + (BSSID == null ? 0 : BSSID.hashCode());
+        hash = hash * 31 + (SSID == null ? 0 : SSID.hashCode());
+        hash = hash * 31 + (capabilities == null ? 0 : capabilities.hashCode());
+        return hash;
+
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null)
+            return false;
+        if (this.getClass() != other.getClass())
+            return false;
+        WFScanResult o = (WFScanResult) other;
+        return o.BSSID.equals(this.BSSID);
+
+    }
+
+    public Bundle toBundle() {
+        Bundle wrapper = new Bundle();
+        Bundle bundle = new Bundle();
+        bundle.putString(SSID_BUNDLE_KEY, SSID);
+        bundle.putString(BSSID_BUNDLE_KEY, BSSID);
+        bundle.putString(CAPABILITIES_BUNDLE_KEY, capabilities);
+        bundle.putInt(LEVEL_BUNDLE_KEY, level);
+        bundle.putInt(FREQUENCY_BUNDLE_KEY, frequency);
+        wrapper.putBundle(BUNDLE_KEY, bundle);
+        return wrapper;
     }
 }
